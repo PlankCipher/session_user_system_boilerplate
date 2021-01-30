@@ -5,7 +5,7 @@ class User {
   static async findOrCreate(username, password) {
     try {
       const findUserSQL =
-        'SELECT * FROM users WHERE username = CONVERT(? USING utf8) COLLATE utf8_bin';
+        'SELECT * FROM users WHERE username = CONVERT(? USING utf8mb4) COLLATE utf8mb4_bin';
       const [findUserResult] = await execQuery(findUserSQL, [username]);
 
       if (findUserResult.length === 0) {
@@ -36,7 +36,7 @@ class User {
   static async findByUsername(username) {
     try {
       const findUserSQL =
-        'SELECT * FROM users WHERE username = CONVERT(? USING utf8) COLLATE utf8_bin';
+        'SELECT * FROM users WHERE username = CONVERT(? USING utf8mb4) COLLATE utf8mb4_bin';
 
       const [findUserResult] = await execQuery(findUserSQL, [username]);
 
