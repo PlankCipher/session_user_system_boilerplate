@@ -16,10 +16,12 @@ router.post('/login', requireNotLoggedIn, async (req, res, next) => {
 
     const { err, user } = await User.findByUsername(username);
 
-    if (err) {
+    if (err && err.statusCode === 404) {
       const newErr = new Error('Incorrect credentials.');
       newErr.statusCode = 401;
       throw newErr;
+    } else if (err) {
+      throw err;
     } else {
       const passwordMatch = await bcrypt.compare(password, user.password);
 

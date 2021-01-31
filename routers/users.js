@@ -13,6 +13,7 @@ router.get(
     try {
       const { username } = req.params;
       const { err, user } = await User.findByUsername(username);
+
       if (err) {
         throw err;
       } else {
